@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.source_files  = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
   s.public_header_files = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
 
-  s.dependency 'InnovidAdRenderer', '1.0.7'
+  s.dependency 'InnovidAdRenderer', '1.0.8'
   s.vendored_frameworks = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework"
 
 end
