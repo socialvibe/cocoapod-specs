@@ -9,21 +9,16 @@ Pod::Spec.new do |s|
   ad-elimination aspect must be implemented by the application. More information on how that should be implemented
   is available in the initial documentation provided.
                    DESC
-
   s.homepage     = "https://www.github.com/socialvibe"
-  s.license      = {
-    "text" => "Copyright 2017 true[X]media",
-    "type" => "Copyright"
-  }
+  s.license      = { :text => "Copyright 2017 true[X]media", :type => "Copyright" }
+  s.author       = { "Jesse Albini" => "jesse@truex.com" }
 
-  s.author             = { "Jesse Albini" => "jesse@truex.com" }
   s.tvos.deployment_target = "10.0"
-  s.source       = { :http => "https://stash.truex.com/integration/TruexAdRenderer-tvOS-v#{s.version}.zip" }
 
-  s.source_files  = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
+  s.source              = { :http => "https://stash.truex.com/integration/TruexAdRenderer-tvOS-v#{s.version}.zip" }
+  s.source_files        = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
   s.public_header_files = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
-
-  s.dependency 'InnovidAdRenderer', '1.0.8'
   s.vendored_frameworks = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework"
 
+  s.dependency 'InnovidAdRenderer', '1.0.8'
 end
