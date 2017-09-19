@@ -12,8 +12,8 @@ Pod::Spec.new do |s|
 
   s.homepage     = "https://www.github.com/socialvibe"
   s.license      = {
-    "text": "Copyright 2017 true[X]media",
-    "type": "Copyright"
+    "text" => "Copyright 2017 true[X]media",
+    "type" => "Copyright"
   }
 
   s.author             = { "Jesse Albini" => "jesse@truex.com" }
