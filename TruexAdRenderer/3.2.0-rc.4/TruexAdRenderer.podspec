@@ -20,9 +20,5 @@ Pod::Spec.new do |s|
   s.public_header_files = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework/Headers/*.h"
   s.vendored_frameworks = "TruexAdRenderer-tvOS-v#{s.version}/TruexAdRenderer.framework"
 
-  s.resource_bundles = { 
-    'Footer' => [ "TruexAdRenderer-tvOS-v#{s.version}/Footer/*.png" ]
-  }
-
   s.dependency 'InnovidAdRenderer', '~> 1.2.5'
 end
