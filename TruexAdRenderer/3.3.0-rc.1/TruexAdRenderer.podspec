@@ -27,6 +27,7 @@ Pod::Spec.new do |s|
     'Truex' => ["TruexAdRenderer-tvOS-v#{s.version}/Assets/*.png"]
   }
  
+  s.dependency 'YouiTVAdRenderer', '0.1.0'
   s.dependency 'InnovidAdRenderer', '1.2.8'
   s.dependency 'SDWebImage', '~> 4.2.3'
   s.dependency 'OptimizelySDKTVOS', '1.1.9'
