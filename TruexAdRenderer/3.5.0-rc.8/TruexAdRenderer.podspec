@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   }
  
   s.dependency 'YouiTVAdRenderer', '~> 1.1.1'
-  s.dependency 'InnovidAdRenderer', '1.3.11'
+  s.dependency 'InnovidAdRenderer', '~> 1.3.11'
   s.dependency 'SDWebImage', '~> 4.2.3'
   s.dependency 'OptimizelySDKTVOS', '1.1.9'
 end
