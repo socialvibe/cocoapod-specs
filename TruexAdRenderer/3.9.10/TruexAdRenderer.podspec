@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
     'Truex' => ["TruexAdRenderer-tvOS-v#{s.version}/Assets/*.png"]
   }
 
-  s.dependency "InnovidAdRenderer_#{xcode_version}", '1.5.34'
+  s.dependency "InnovidAdRenderer_#{innovid_xcode_version}", '1.5.34'
   s.dependency 'SDWebImage', '4.2.3'
   s.dependency 'PusherSwift', '8.0'
   s.dependency 'TVOS360Video', '1.1.3'
