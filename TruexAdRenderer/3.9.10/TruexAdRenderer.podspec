@@ -24,12 +24,9 @@ Pod::Spec.new do |s|
     xcode_version = 'xcode12.0.0'
   end
 
-  # this is flag which can be manually set as a "User-Defined" setting in Xcode
-  # it is set within in your app: Target -> Build Settings -> User-Defined
-  # add "LEGACY_BUILD_SYSTEM_ENABLED = YES"
-  # read more: https://medium.com/@kavithakumarasamy89/xcode-build-settings-user-defined-settings-manage-multiple-environments-with-single-target-3e5c1a307999
-  LEGACY_BUILD_SYSTEM_FLAG=%x( echo `xcodebuild -showBuildSettings 2>&1 | grep -c 'LEGACY_BUILD_SYSTEM_ENABLED = YES'` )
-  LEGACY_BUILD_SYSTEM_ENABLED = LEGACY_BUILD_SYSTEM_FLAG.to_i == 1
+  # this is an environment variable you can set export LEGACY_BUILD_SYSTEM_ENABLED=YES
+  LEGACY_BUILD_SYSTEM_FLAG=%x( echo $LEGACY_BUILD_SYSTEM_ENABLED )
+  LEGACY_BUILD_SYSTEM_ENABLED = LEGACY_BUILD_SYSTEM_FLAG.strip == "YES"
   puts "Using Xcode legacy build system: #{LEGACY_BUILD_SYSTEM_ENABLED}"
 
   XCODE_VERSION_OVERRIDE = %x( echo $TX_XCODE ).to_s.strip unless defined? XCODE_VERSION_OVERRIDE
@@ -63,6 +60,13 @@ Pod::Spec.new do |s|
     s.tvos.deployment_target = "10.0"
   else
     s.tvos.deployment_target = "13.0"
+  end
+
+  if(XCODE_VERSION_MAJOR.to_i > 11 && LEGACY_BUILD_SYSTEM_ENABLED)
+    # legacy build system does not support Innovid Xcode 12+
+    innovid_xcode_version = "xcode11.4.0"
+  else
+    innovid_xcode_version = xcode_version
   end
 
   s.source              = { :http => "https://stash.truex.com/integration/TruexAdRenderer-tvOS-v#{s.version}-#{xcode_version}.zip" }
