@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   }
 
   # this is an environment variable you can set export TRUEX_VERBOSE_LOGS=YES
-  TRUEX_VERBOSE_FLAG=%x( echo $TRUEX_VERBOSE_LOGS )
-  verbose_logs = TRUEX_VERBOSE_FLAG.strip == 'YES'
+  truex_verbose_flag = %x( echo $TRUEX_VERBOSE_LOGS )
+  verbose_logs = truex_verbose_flag.strip == 'YES'
   debug_log_lambda.call("Using verbose logs: #{verbose_logs}")
 
   xcode_version_major=%x( xcodebuild -version |  grep -i -E "^xcode [\-beta\ ]*[0-9]+\.[0-9]+" | head -1 | sed "s/[^0-9\.]//g" | cut -d'.' -f1 | tr -d '\n' ) unless defined? XCODE_VERSION_MAJOR
@@ -39,15 +39,16 @@ Pod::Spec.new do |s|
   end
 
   # this is an environment variable you can set export LEGACY_BUILD_SYSTEM_ENABLED=YES
-  LEGACY_BUILD_SYSTEM_FLAG=%x( echo $LEGACY_BUILD_SYSTEM_ENABLED )
-  LEGACY_BUILD_SYSTEM_ENABLED = LEGACY_BUILD_SYSTEM_FLAG.strip == 'YES'
-  debug_log_lambda.call("Using Xcode legacy build system: #{LEGACY_BUILD_SYSTEM_ENABLED}")
+  legacy_build_system_flag = %x( echo $LEGACY_BUILD_SYSTEM_ENABLED )
+  legacy_build_system_enabled = legacy_build_system_flag.strip == 'YES'
+  debug_log_lambda.call("Using Xcode legacy build system: #{legacy_build_system_enabled}")
 
-  XCODE_VERSION_OVERRIDE = %x( echo $TX_XCODE ).to_s.strip unless defined? XCODE_VERSION_OVERRIDE
-  unless XCODE_VERSION_OVERRIDE.empty?
-    xcode_version = XCODE_VERSION_OVERRIDE
+  xcode_version_override = ""
+  xcode_version_override = %x( echo $TX_XCODE ).to_s.strip unless defined? xcode_version_override
+  unless xcode_version_override.empty?
+    xcode_version = xcode_version_override
     xcode_version_major = xcode_version.gsub('xcode', '').split('.')[0]
-    debug_log_lambda.call("Overriding Xcode version to #{XCODE_VERSION_OVERRIDE}")
+    debug_log_lambda.call("Overriding Xcode version to #{xcode_version_override}")
     debug_log_lambda.call("Overriding Xcode major version to #{xcode_version_major}")
   end
 
@@ -71,13 +72,13 @@ Pod::Spec.new do |s|
     'Isaiah Mann' => 'isaiah@truex.com'
   }
 
-  if(xcode_version_major.to_i <= 11 || LEGACY_BUILD_SYSTEM_ENABLED)
+  if(xcode_version_major.to_i <= 11 || legacy_build_system_enabled)
     s.tvos.deployment_target = '10.0'
   else
     s.tvos.deployment_target = '13.0'
   end
 
-  if(xcode_version_major.to_i > 11 && LEGACY_BUILD_SYSTEM_ENABLED)
+  if(xcode_version_major.to_i > 11 && legacy_build_system_enabled)
     # legacy build system does not support Innovid Xcode 12+
     innovid_xcode_version = 'xcode11.4.0'
   else
